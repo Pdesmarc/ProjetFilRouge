@@ -3,13 +3,14 @@
 from flask import Flask, request, jsonify
 import os
 import csv
+import base64
 
 #Init app
 app = Flask(__name__)
 
 metadonne={}
 jsonoutput={}
-ALLOWED_EXTENSIONS = {'txt', 'csv'} # 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+ALLOWED_EXTENSIONS = {'txt', 'csv', 'jpg', 'jpeg' ,'pdf', 'png'} #, 'gif'}
 
 @app.route("/transform", methods=['POST'])
 def upload_file():
@@ -25,7 +26,7 @@ def upload_file():
                 return jsonify(jsonoutput)
 
             elif filetodisplay.mimetype == 'text/csv':
-                # ',' must be the delimiter of the csv input
+                # ',' must be the delimiter of the csv input, try csv.sniffer if you want to use different delimiter
                 metadonne['mimetype'] = filetodisplay.mimetype
                 metadonne['filename'] = filetodisplay.filename
                 fileString = filetodisplay.read().decode('utf-8')
@@ -33,9 +34,20 @@ def upload_file():
                 jsonoutput['Metadonnees'] = metadonne
                 jsonoutput['Data']=datafile
                 return jsonify(jsonoutput)
+            else:
+                metadonne['mimetype'] = filetodisplay.mimetype
+                metadonne['filename'] = filetodisplay.filename
+                jsonoutput['Metadonnees'] = metadonne
+                
+                data_string = base64.b64encode(filetodisplay.read())
+                jsonoutput['Data']=data_string.decode('utf-8')
+                return jsonify(jsonoutput)
+
         else:
+            #return filetodisplay.mimetype
             return 'The mimetype of your file is not yet supported' 
     else:
+        #return filetodisplay.mimetype
         return 'Please enclose a file'
 
 
