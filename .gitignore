@@ -1,5 +1,12 @@
+#Python thing
 __pycache__
 .idea
+
+#VIM Temporary FIle
 *.*~
+
+#IDE
 .vscode
-db.sqlite
+
+#Repository of test files
+testFile/
