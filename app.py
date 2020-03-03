@@ -1,12 +1,27 @@
 #encoding : utf-8
 
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import os
 import csv
 import base64
+from flask_swagger_ui import get_swaggerui_blueprint
 
 #Init app
 app = Flask(__name__)
+CORS(app, support_credentials=True)
+### swagger specific ###
+SWAGGER_URL = '/swagger'
+API_URL = '/static/swagger.json'
+SWAGGERUI_BLUEPRINT = get_swaggerui_blueprint(
+    SWAGGER_URL,
+    API_URL,
+    config={
+        'app_name': "Swagger Fil Rouge"
+    }
+)
+app.register_blueprint(SWAGGERUI_BLUEPRINT, url_prefix=SWAGGER_URL)
+### end swagger specific ###
 
 metadonne={}
 jsonoutput={}
@@ -14,8 +29,8 @@ ALLOWED_EXTENSIONS = {'txt', 'csv', 'jpg', 'jpeg' ,'pdf', 'png'} #, 'gif'}
 
 @app.route("/transform", methods=['POST'])
 def upload_file():
-    if request.files['data_file']:
-        filetodisplay = request.files['data_file']
+    if request.files['upfile']:
+        filetodisplay = request.files['upfile']
         if filetodisplay.filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS:
             if filetodisplay.mimetype == 'text/plain':
                 metadonne['mimetype'] = filetodisplay.mimetype
@@ -48,7 +63,7 @@ def upload_file():
             return 'The mimetype of your file is not yet supported' 
     else:
         #return filetodisplay.mimetype
-        return 'Please enclose a file'
+        return 'Please enclose a file'""
 
 
 #Run server 

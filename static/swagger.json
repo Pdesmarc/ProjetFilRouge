@@ -1,0 +1,77 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Il s'agit de mon serveur concernant le projet fil rouge du MS SIO. Pour rappel, l'objectif de ce mini projet est de réaliser une API de type REST en python, accessible sur un serveur distant hébergé dans le cloud (RosettaHUB). Le client soumet un fichier et récupère sa traduction en JSON associée à des méta- données établies lors de sa traduction (type MIME reconnu, nom, A COMPLETER). Pour l'instant, seul les formats : .txt, .csv, .pdf, .jpg, .jpeg, .png sont supportés.  ",
+    "version": "1.0.0",
+    "title": "Swagger Fil Rouge",
+    "termsOfService": "http://filrouge.io/terms/",
+    "contact": {
+      "email": "pierre.desmarchelier@student-cs.fr"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "localhost:5000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "File",
+      "description": "Everything about your file"
+    }
+  ],
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "paths": {
+    "/transform": {
+      "post": {
+        "tags": [
+          "File"
+        ],
+        "summary": "Get informations about your file",
+        "description": "The API returns you a json with the mimetype and the data of your file",
+        "operationId": "uploadFile",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "upfile",
+            "in": "formData",
+            "description": "File to upload",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApiResponse": {
+      "type": "object",
+      "properties": {
+        "Data": {
+            "type": "string"
+          },
+        "Metadonnees": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
