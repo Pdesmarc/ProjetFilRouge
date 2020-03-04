@@ -10,3 +10,6 @@ __pycache__
 
 #Repository of test files
 testFile/
+
+#File of self commentaries to improve the api
+to_improve.txt

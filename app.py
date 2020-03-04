@@ -1,5 +1,6 @@
 #encoding : utf-8
 
+import argparse
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
@@ -9,7 +10,6 @@ from flask_swagger_ui import get_swaggerui_blueprint
 
 #Init app
 app = Flask(__name__)
-CORS(app, support_credentials=True)
 ### swagger specific ###
 SWAGGER_URL = '/swagger'
 API_URL = '/static/swagger.json'
@@ -68,4 +68,17 @@ def upload_file():
 
 #Run server 
 if  __name__=='__main__':
-    app.run(debug=True)
+
+    PARSER = argparse.ArgumentParser(description="Flask API Projet FR")
+
+    # To run the server locally, add this argument ( no matter what is the value associated)
+    PARSER.add_argument('--debug', help='Use the API in local with debug mode')
+    
+    ARGS = PARSER.parse_args()
+    if ARGS.debug:
+        # Run server in local
+        CORS(app, support_credentials=True)
+        app.run(debug=True)
+    else :
+        # Run server not in local
+        app.run(host="0.0.0.0", port=80)
