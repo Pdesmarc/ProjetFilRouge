@@ -1,10 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "Il s'agit de mon serveur concernant le projet fil rouge du MS SIO. Pour rappel, l'objectif de ce mini projet est de réaliser une API de type REST en python, accessible sur un serveur distant hébergé dans le cloud (RosettaHUB). Le client soumet un fichier et récupère sa traduction en JSON associée à des méta- données établies lors de sa traduction (type MIME reconnu, nom, A COMPLETER). Pour l'instant, seul les formats : .txt, .csv, .pdf, .jpg, .jpeg, .png sont supportés.  ",
+    "description": "Il s'agit de mon serveur concernant le projet fil rouge du MS SIO. Pour rappel, l'objectif de ce mini projet est de réaliser une API de type REST en python, accessible sur un serveur distant hébergé dans le cloud (RosettaHUB). Le client soumet un fichier et récupère sa traduction en JSON associée à des méta-données établies lors de sa traduction (type MIME reconnu, nom, et taille du fichier). Pour l'instant, seul les formats : .txt, .csv, .pdf, .jpg, .jpeg, .png sont supportés.  ",
     "version": "1.0.0",
-    "title": "Swagger Fil Rouge",
-    "termsOfService": "http://filrouge.io/terms/",
+    "title": "Swagger Projet Fil Rouge",
     "contact": {
       "email": "pierre.desmarchelier@student-cs.fr"
     },
@@ -55,6 +54,9 @@
             "schema": {
               "$ref": "#/definitions/ApiResponse"
             }
+          }, 
+          "400": {
+            "description": "Invalid request"
           }
         }
       }
@@ -68,9 +70,27 @@
             "type": "string"
           },
         "Metadonnees": {
-          "type": "string"
+          "$ref": "#/definitions/Metadonnees"
         }
       }
+    }, 
+    "Metadonnees": {
+      "type": "object",
+      "properties": {
+        "filename": {
+          "type": "string", 
+          "example": "name_example.txt"
+        },
+        "mimetype": {
+          "type": "string",
+          "example": "text/plain"
+        },
+        "size": {
+          "type": "string",
+          "example": "10000 o"
+        }
+      }
+
     }
   }
 }

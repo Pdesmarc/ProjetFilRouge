@@ -13,3 +13,9 @@ testFile/
 
 #File of self commentaries to improve the api
 to_improve.txt
+
+#Serverless stuff
+.serverless
+node_modules
+package.json
+package-lock.json
