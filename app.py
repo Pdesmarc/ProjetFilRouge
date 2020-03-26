@@ -128,7 +128,7 @@ if  __name__=='__main__':
     if ARGS.debug:
         # Run server in local
         CORS(app, support_credentials=True)
-        app.run(debug=True, ssl_context='adhoc')
+        app.run(debug=True) #ssl_context='adhoc'
     else :
         # Run server not in local
         app.run(host="0.0.0.0", port=80) #ssl_context=adhoc 
