@@ -5,8 +5,8 @@ Projet Fil Rouge is a REST API using :
   - Python
   - Flask
  
- This API was designed to complete the Fil rouge project of MS SIO. The goal to this API is to retrieve the metadata (name, mimetype, and size) of an input file associated to the data  present in the file. For the moment, only those mimetypes are supported : *.txt*, *.csv* ( "," must be the delimiter),  *.jpg*, *.jpeg* , *.pdf*, *.png* .
-The API send back the metadata and data in a json. To see more and to use it, follow the following steps : 
+ This API was designed to complete the Fil rouge project of MS SIO. The goal of this API is to retrieve the metadata (name, mimetype, and size) of an input file associated to the data  present in the file. For the moment, only those mimetypes are supported : *.txt*, *.csv* ( "," must be the delimiter),  *.jpg*, *.jpeg* , *.pdf*, *.png* .
+The API send back the metadata and data in a json. To see more and to use it, please follow the following steps : 
 
 
 ## Getting started
