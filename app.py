@@ -29,7 +29,7 @@ app.register_blueprint(SWAGGERUI_BLUEPRINT, url_prefix=SWAGGER_URL)
 #Init var
 metadonne={}
 jsonoutput={}
-ALLOWED_EXTENSIONS = {'txt', 'csv', 'jpg', 'jpeg' ,'pdf', 'png'} #, 'gif'}
+ALLOWED_EXTENSIONS = {'txt', 'csv', 'jpg', 'jpeg' ,'pdf', 'png'}
 
 def allowed_file(filename):
     ''' Check if the file respond to our in input criteria
